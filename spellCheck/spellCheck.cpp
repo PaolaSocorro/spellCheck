@@ -14,7 +14,6 @@ using namespace std;
 char alphabet[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 int letterCount[26]={ 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 };
 char text[1000];
-int charCount;
 //converts text to lowercase.
 char lowercaseCon(char input [1000])
 {
@@ -54,10 +53,13 @@ void count (char input [1000])
 
 void characterCount()
 {
+	int charCount=0;
 	for(int j=0; j<strlen(text); j++)
 	{
 		charCount++;
 	}
+	cout<<'\n';
+	cout<<"Character Count: "<<charCount<<endl;
 }
 void report ()
 {
@@ -76,29 +78,35 @@ void report ()
 }
 void max()
 {
-	int largest = letterCount[0];
-	int pos=0;
-	for(int i=1; i<26;i++)
+	int length=sizeof letterCount/ sizeof letterCount[0];
+	int max=letterCount[0];
+	int sMax=letterCount[1];
+	int temp;
+	int pos;
+	for(int i=1; i<length;i++)
 	{
-		pos++;
-		if(letterCount[i]>largest)
-			largest=letterCount[i];
+		
+		if(letterCount[i]>max)
+		{
+			max=letterCount[i];
+			pos=i;
+		}
+		
 	}
-	cout<<"large "<<alphabet[pos];
-	//return largest;
+	cout<<'\n';
+	cout<<"Most frequent letter is: "<<alphabet[pos]<<" at "<<max<<" counts.";
 }
 void main()
 {
-	int c;
+	//int c;
 	cout<<"Enter a sentence with a mix of lower and uppercase to convert: "<<endl;
 	cin.getline(text,1000,'\n');
 
 	text[1000]=lowercaseCon(text);
 	count(text);
-	//c=max();
-	cout<<'\n';
-	//cout<<"Most frequent letter is :"<<alphabet[c];
 	max();
+	cout<<'\n';
+	characterCount();
 	cout<<'\n';
 	cout<<'\n';
 	report();
